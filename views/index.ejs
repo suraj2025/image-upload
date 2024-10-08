@@ -3,13 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Upload</title>
+  <title>Image Upload App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .image-card {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .image-card img {
+      max-width: 200px;
+      max-height: 200px;
+    }
+  </style>
 </head>
 <body>
   <h1>Upload an Image</h1>
+
+  <!-- Form for uploading an image -->
   <form action="/upload" method="POST" enctype="multipart/form-data">
     <input type="file" name="image" required>
     <button type="submit">Upload</button>
   </form>
+
+  <h2>All Uploaded Images</h2>
+
+  <!-- Displaying all images -->
+  <div class="image-container">
+    <% images.forEach(image => { %>
+      <div class="image-card">
+        <img src="<%= image.imageUrl %>" alt="<%= image.imageName %>">
+        <p><%= image.imageName %></p>
+      </div>
+    <% }) %>
+  </div>
 </body>
 </html>
