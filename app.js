@@ -35,7 +35,13 @@ const upload = multer({ storage: storage });
 
 // Routes
 app.get('/', (req, res) => {
-  res.render('index');
+  try {
+    const images = await Image.find();
+    res.render('index', { images });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error loading images');
+  }
 });
 
 app.post('/upload', upload.single('image'), async (req, res) => {
